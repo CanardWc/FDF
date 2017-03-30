@@ -6,11 +6,11 @@
 /*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 01:02:32 by fgrea             #+#    #+#             */
-/*   Updated: 2017/01/25 06:22:58 by fgrea            ###   ########.fr       */
+/*   Updated: 2017/03/13 17:47:17 by fgrea            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 char	*ft_strnew(size_t size)
 {

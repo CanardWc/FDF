@@ -6,11 +6,11 @@
 /*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 21:11:50 by fgrea             #+#    #+#             */
-/*   Updated: 2016/11/18 22:07:01 by fgrea            ###   ########.fr       */
+/*   Updated: 2017/03/13 17:49:09 by fgrea            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 int		ft_toupper(int c)
 {

@@ -6,11 +6,11 @@
 /*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 04:08:42 by fgrea             #+#    #+#             */
-/*   Updated: 2016/11/18 12:52:56 by fgrea            ###   ########.fr       */
+/*   Updated: 2017/03/13 17:41:54 by fgrea            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {

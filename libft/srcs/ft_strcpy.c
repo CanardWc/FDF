@@ -6,11 +6,11 @@
 /*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 07:51:59 by fgrea             #+#    #+#             */
-/*   Updated: 2016/11/17 03:54:03 by fgrea            ###   ########.fr       */
+/*   Updated: 2017/03/13 17:45:02 by fgrea            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 char	*ft_strcpy(char *dst, const char *src)
 {

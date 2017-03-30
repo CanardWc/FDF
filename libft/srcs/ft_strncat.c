@@ -6,11 +6,11 @@
 /*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:51:00 by fgrea             #+#    #+#             */
-/*   Updated: 2016/11/19 08:04:04 by fgrea            ###   ########.fr       */
+/*   Updated: 2017/03/13 17:46:47 by fgrea            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 char	*ft_strncat(char *s1, const char *s2, size_t n)
 {

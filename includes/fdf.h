@@ -6,7 +6,7 @@
 /*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 21:15:03 by fgrea             #+#    #+#             */
-/*   Updated: 2017/03/01 17:11:27 by fgrea            ###   ########.fr       */
+/*   Updated: 2017/03/30 14:50:38 by fgrea            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define FDF_H
 
 # include "../libft/includes/libft.h"
-# include <mlx.h>
+# include "../minilibx_macos/mlx.h"
+# include <math.h>
 
 typedef struct		s_map
 {
@@ -23,30 +24,60 @@ typedef struct		s_map
 	ssize_t			y;
 }					t_map;
 
-typedef struct		s_pixel
+typedef struct		s_pxl
 {
-	int				R;
-	int				G;
-	int				B;
+	void			*mlx;
+	void			*win;
+	void			*img;
+	char			*data;
+	t_map			*imap;
 
+	int				r;
+	int				g;
+	int				b;
+
+	int				iwidth;
+	int				iheight;
 	int				ix;
 	int				iy;
-	int				iso;
-	int				Bx1;
-	int				Bx2;
-	int				By1;
-	int				By2;
-	int				Be;
-	int				Bdx;
-	int				Bdy;
-}					t_pixel;
 
-t_map		*fdf_parcing(char *argv);
-void		*fdf_create_image(void *mlx_ptr, t_map *smap);
-t_pixel		*fdf_depths_colors(t_pixel *pixel, int depths);
-t_pixel		*fdf_set_color(t_pixel *pixel, int set_base);
-char		*fdf_image_pixel(t_pixel *pixel, char *data, int size, t_map *imap);
-void		fdf_usage(int argc);
-void		fdf_other_errors();
+	int				czoom;
+	int				cxcenter;
+	int				cycenter;
+	float			c1;
+	float			c2;
+	float			c3;
+
+	float			zoom;
+	float			xdcl;
+	float			ydcl;
+	int				dpth;
+
+	int				size;
+	int				bx1;
+	int				bx2;
+	int				by1;
+	int				by2;
+	int				dx;
+	int				dy;
+	int				e;
+
+	int				c;
+	int				ci;
+	int				cj;
+}					t_pxl;
+
+void				fdf_create_hud(t_pxl *pxl);
+char				*fdf_bress(t_pxl *pxl, t_map *imap);
+t_map				*fdf_parcing(char *argv);
+void				*fdf_create_image(t_map *smap, t_pxl *pxl);
+t_pxl				*fdf_depths_colors(t_pxl *pxl, int depths);
+t_pxl				*fdf_set_color(t_pxl *pxl, int set_base);
+char				*fdf_image_pxl(t_pxl *pxl, t_map *imap);
+void				fdf_usage(int argc);
+void				fdf_other_errors();
+int					fdf_key_capture(int kcd, t_pxl *pxl);
+void				*fdf_kcd_for_img(t_pxl *pxl, t_map *imap);
+void				fdf_map_error(void);
 
 #endif

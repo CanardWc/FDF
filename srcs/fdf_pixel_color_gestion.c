@@ -6,51 +6,51 @@
 /*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 17:49:28 by fgrea             #+#    #+#             */
-/*   Updated: 2017/03/01 17:50:10 by fgrea            ###   ########.fr       */
+/*   Updated: 2017/03/13 17:54:53 by fgrea            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-t_pixel				*fdf_set_color(t_pixel *pixel, int set_base)
+t_pxl			*fdf_set_color(t_pxl *pxl, int set_base)
 {
 	if (set_base == 1)
 	{
-		pixel->R = 200;
-		pixel->G = 100;
-		pixel->B = 100;
+		pxl->r = 200;
+		pxl->g = 100;
+		pxl->b = 100;
 	}
 	if (set_base == 2)
 	{
-		pixel->R = 100;
-		pixel->G = 200;
-		pixel->B = 100;
+		pxl->r = 100;
+		pxl->g = 200;
+		pxl->b = 100;
 	}
 	if (set_base == 3)
 	{
-		pixel->R = 100;
-		pixel->G = 100;
-		pixel->B = 200;
+		pxl->r = 100;
+		pxl->g = 100;
+		pxl->b = 200;
 	}
-	return (pixel);
+	return (pxl);
 }
 
-t_pixel			*fdf_depths_colors(t_pixel *pixel, int depths)
+t_pxl			*fdf_depths_colors(t_pxl *pxl, int depths)
 {
-	if (pixel->R == 200)
+	if (pxl->r == 200)
 	{
-		pixel->G += depths;
-		pixel->B += depths;
+		pxl->g += depths;
+		pxl->b += depths;
 	}
-	if (pixel->G == 200)
+	if (pxl->g == 200)
 	{
-		pixel->R += depths;
-		pixel->B += depths;
+		pxl->r += depths;
+		pxl->b += depths;
 	}
-	if (pixel->B == 200)
+	if (pxl->b == 200)
 	{
-		pixel->R += depths;
-		pixel->G += depths;
+		pxl->r += depths;
+		pxl->g += depths;
 	}
-	return (pixel);
+	return (pxl);
 }

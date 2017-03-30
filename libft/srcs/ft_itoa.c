@@ -6,11 +6,11 @@
 /*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 13:18:21 by fgrea             #+#    #+#             */
-/*   Updated: 2016/11/20 20:47:07 by fgrea            ###   ########.fr       */
+/*   Updated: 2017/03/13 17:40:43 by fgrea            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 static void		ft_isnegative(int *n, int *neg)
 {

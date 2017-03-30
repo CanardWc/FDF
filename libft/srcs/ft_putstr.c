@@ -6,11 +6,11 @@
 /*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 17:54:03 by fgrea             #+#    #+#             */
-/*   Updated: 2016/11/19 06:18:30 by fgrea            ###   ########.fr       */
+/*   Updated: 2017/03/13 17:44:08 by fgrea            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 void	ft_putstr(char const *str)
 {

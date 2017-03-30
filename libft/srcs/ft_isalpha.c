@@ -6,11 +6,11 @@
 /*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 20:23:03 by fgrea             #+#    #+#             */
-/*   Updated: 2016/11/17 03:47:04 by fgrea            ###   ########.fr       */
+/*   Updated: 2017/03/13 17:39:38 by fgrea            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 int		ft_isalpha(int c)
 {

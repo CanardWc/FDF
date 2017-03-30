@@ -6,11 +6,11 @@
 /*   By: cbarbier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/12 12:31:51 by cbarbier          #+#    #+#             */
-/*   Updated: 2017/02/18 08:51:26 by fgrea            ###   ########.fr       */
+/*   Updated: 2017/03/13 17:48:24 by fgrea            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 static int				nb_words(char **aptr, char c)
 {

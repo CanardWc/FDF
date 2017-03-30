@@ -6,11 +6,11 @@
 /*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 04:30:26 by fgrea             #+#    #+#             */
-/*   Updated: 2017/02/06 18:37:23 by fgrea            ###   ########.fr       */
+/*   Updated: 2017/03/13 17:46:12 by fgrea            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 char	*ft_strjoin(const char *s1, const char *s2)
 {

@@ -6,11 +6,11 @@
 /*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 07:56:10 by fgrea             #+#    #+#             */
-/*   Updated: 2017/01/25 10:35:42 by fgrea            ###   ########.fr       */
+/*   Updated: 2017/03/13 17:47:24 by fgrea            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 size_t		ft_strnlen(char *s, int c)
 {

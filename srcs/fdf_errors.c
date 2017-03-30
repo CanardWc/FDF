@@ -6,7 +6,7 @@
 /*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 20:06:07 by fgrea             #+#    #+#             */
-/*   Updated: 2017/02/22 18:01:38 by fgrea            ###   ########.fr       */
+/*   Updated: 2017/03/13 17:52:45 by fgrea            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ void	fdf_usage(int argc)
 		ft_putendl("usage: ./FDF source_file");
 		exit(1);
 	}
+}
+
+void	fdf_map_error(void)
+{
+	ft_putendl("bad map");
+	exit(1);
 }
 
 void	fdf_other_errors(void)

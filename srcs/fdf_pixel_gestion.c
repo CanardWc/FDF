@@ -6,116 +6,113 @@
 /*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 14:40:03 by fgrea             #+#    #+#             */
-/*   Updated: 2017/03/01 20:28:02 by fgrea            ###   ########.fr       */
+/*   Updated: 2017/03/13 17:58:48 by fgrea            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../includes/fdf.h"
 
-static t_pixel		*fdf_pixel_prepare(t_pixel *pixel, t_map *imap, \
-										int size, int i)
+static t_pxl		*fdf_pxl_prepare_n(t_pxl *pxl, t_map *imap, int i)
 {
-	if (pixel->ix == 0)
-		pixel->iso = (40 * pixel->iy);
-	pixel->Bx1 = pixel->ix * 40 + pixel->iso;
-	pixel->By1 = pixel->iy * 40 * size - imap->map[pixel->iy][pixel->ix];
 	if (i == 0)
 	{
-		pixel->Bx2 = (pixel->ix + 1) * 40 + pixel->iso;
-		pixel->By2 = pixel->iy * 40 * size \
-					 - imap->map[pixel->iy][pixel->ix + 1];
+		pxl->bx2 = (pxl->c1 * ((pxl->ix + 1) - pxl->iy)) * \
+				pxl->czoom + pxl->cxcenter;
+		pxl->by2 = -((pxl->c2 * (imap->map[pxl->iy][pxl->ix + 1] / 16.0)) \
+				- (pxl->c3 * ((pxl->ix + 1) + pxl->iy))) * \
+				pxl->czoom + pxl->cycenter;
 	}
 	else if (i == 1)
 	{
-		pixel->Bx2 = pixel->ix * 40 + pixel->iso;
-		pixel->By2 = (pixel->iy + 1) * 40 * size \
-					 - imap->map[pixel->iy + 1][pixel->ix];
+		pxl->bx2 = (pxl->c1 * (pxl->ix - (pxl->iy + 1))) * \
+				pxl->czoom + pxl->cxcenter;
+		pxl->by2 = -((pxl->c2 * (imap->map[pxl->iy + 1][pxl->ix] / 16.0)) - \
+				(pxl->c3 * (pxl->ix + (pxl->iy + 1)))) * \
+				pxl->czoom + pxl->cycenter;
 	}
-	/* calc = (pixel->ix * 40 * 4) + (pixel->iy * 40 * size - \
-	   imap->map[pixel->iy][pixel->ix]) + pixel->iso; */
-	return (pixel);
+	return (pxl);
 }
 
-static char			*fdf_bresenhamX(t_pixel *pixel, char *data)
+static t_pxl		*fdf_pxl_prepare(t_pxl *pxl, t_map *imap, int i)
 {
-	int				calc;
-	int				e;
-	int				dx;
-	int				dy;
-
-	e = pixel->Bx2 - pixel->Bx1;
-	dx = e * 2;
-	dy = (pixel->By2 - pixel->By1) * 2;
-	while (pixel->Bx1 <= pixel->Bx2)
-	{
-		calc = pixel->Bx1 * 4 + pixel->By1;
-		data[calc] = pixel->R;
-		data[calc + 1] = pixel->G;
-		data[calc + 2] = pixel->B;
-		pixel->Bx1++;
-		e -= dy;
-		if (e <= 0)
-		{
-			pixel->By1++;
-			e += dx;
-		}
-	}
-	return (data);
+	pxl->czoom = ((pxl->iwidth / imap->x + pxl->iheight / imap->y) / 2.5) + \
+			pxl->zoom;
+	pxl->cxcenter = ((pxl->iwidth / 2) - ((sqrt(2) / 2) * \
+			(imap->x - imap->y)) / 2 * pxl->czoom) + pxl->xdcl;
+	pxl->cycenter = ((pxl->iheight / 2) - ((1 / sqrt(6)) * \
+			(imap->x + imap->y)) / 2 * pxl->czoom) + pxl->ydcl;
+	pxl->c1 = sqrt(2) / 2;
+	pxl->c2 = sqrt(2.0 / 3);
+	pxl->c3 = 1 / sqrt(6);
+	pxl->bx1 = (pxl->c1 * (pxl->ix - pxl->iy)) * pxl->czoom + pxl->cxcenter;
+	pxl->by1 = -((pxl->c2 * (imap->map[pxl->iy][pxl->ix] / 16.0)) - \
+			(pxl->c3 * (pxl->ix + pxl->iy))) * pxl->czoom + pxl->cycenter;
+	pxl = fdf_pxl_prepare_n(pxl, imap, i);
+	return (pxl);
 }
 
-static char			*fdf_bresenhamY(t_pixel *pixel, char *data)
+static t_pxl		*fdf_immersive_3d_n(t_map *imap, t_pxl *pxl, int i)
 {
-	int				calc;
-	int				e;
-	int				dx;
-	int				dy;
-
-	e = pixel->By2 - pixel->By1;
-	dy = e * 2;
-	dx = (pixel->Bx2 - pixel->Bx1) * 2;
-	while (pixel->By1 <= pixel->By2)
+	if (i == 1)
 	{
-		calc = pixel->Bx1 * 4 + pixel->By1;
-		data[calc] = pixel->R;
-		data[calc + 1] = pixel->G;
-		data[calc + 2] = pixel->B;
-		pixel->By1++;
-		e -= dx;
-		if (e <= 0)
-		{
-			pixel->Bx1++;
-			e += dy;
-		}
+		pxl->bx1 = (pxl->c1 * ((pxl->ix + 1) - pxl->iy)) * \
+				pxl->czoom + pxl->cxcenter;
+		pxl->by1 = -((pxl->c2 * (imap->map[pxl->iy][pxl->ix + 1] / 16.0)) - \
+				(pxl->c3 * ((pxl->ix + 1) + pxl->iy))) * \
+				pxl->czoom + pxl->cycenter;
+		pxl->bx2 = (pxl->c1 * (pxl->ix - (pxl->iy + 1))) * \
+				pxl->czoom + pxl->cxcenter;
+		pxl->by2 = -((pxl->c2 * (imap->map[pxl->iy + 1][pxl->ix] / 16.0)) - \
+				(pxl->c3 * (pxl->ix + (pxl->iy + 1)))) * \
+				pxl->czoom + pxl->cycenter;
 	}
-	return (data);
+	if (i == 2)
+	{
+		pxl->bx1 = (pxl->c1 * (pxl->ix - pxl->iy)) * pxl->czoom + pxl->cxcenter;
+		pxl->by1 = -((pxl->c2 * (imap->map[pxl->iy][pxl->ix] / 16.0)) - \
+				(pxl->c3 * (pxl->ix + pxl->iy))) * pxl->czoom + pxl->cycenter;
+		pxl->bx2 = (pxl->c1 * ((pxl->ix + 1) - (pxl->iy + 1))) * \
+				pxl->czoom + pxl->cxcenter;
+		pxl->by2 = -((pxl->c2 * (imap->map[pxl->iy + 1][pxl->ix + 1] / 16.0)) -\
+				(pxl->c3 * ((pxl->ix + 1) + (pxl->iy + 1)))) * \
+				pxl->czoom + pxl->cycenter;
+	}
+	return (pxl);
 }
 
-char				*fdf_image_pixel(t_pixel *pixel, char *data, int size, \
-		t_map *imap)
+static char			*fdf_immersive_3d(t_map *imap, t_pxl *pxl)
 {
-	int				calc;
+	if ((imap->map[pxl->iy][pxl->ix] == imap->map[pxl->iy][pxl->ix + 1] && \
+		imap->map[pxl->iy][pxl->ix] == imap->map[pxl->iy + 1][pxl->ix] && \
+		imap->map[pxl->iy + 1][pxl->ix + 1] != imap->map[pxl->iy][pxl->ix]) || \
+		(imap->map[pxl->iy][pxl->ix + 1] == imap->map[pxl->iy + 1][pxl->ix + 1]\
+		&& imap->map[pxl->iy][pxl->ix + 1] == imap->map[pxl->iy + 1][pxl->ix] \
+		&& imap->map[pxl->iy][pxl->ix + 1] != imap->map[pxl->iy][pxl->ix]))
+		pxl = fdf_immersive_3d_n(imap, pxl, 1);
+	if ((imap->map[pxl->iy][pxl->ix] == imap->map[pxl->iy + 1][pxl->ix] && \
+		imap->map[pxl->iy][pxl->ix] == imap->map[pxl->iy + 1][pxl->ix + 1] && \
+		imap->map[pxl->iy][pxl->ix + 1] != imap->map[pxl->iy][pxl->ix]) || \
+		(imap->map[pxl->iy][pxl->ix] == imap->map[pxl->iy][pxl->ix + 1] && \
+		imap->map[pxl->iy][pxl->ix] == imap->map[pxl->iy + 1][pxl->ix + 1] && \
+		imap->map[pxl->iy + 1][pxl->ix] != imap->map[pxl->iy][pxl->ix]))
+		pxl = fdf_immersive_3d_n(imap, pxl, 2);
+	pxl->data = fdf_bress(pxl, imap);
+	return (pxl->data);
+}
 
-	if (pixel->ix + 1 <= imap->x - 1)
+char				*fdf_image_pxl(t_pxl *pxl, t_map *imap)
+{
+	if (pxl->ix + 1 <= imap->x - 1)
 	{
-		pixel = fdf_pixel_prepare(pixel, imap, size, 0);
-		if (imap->map[pixel->iy][pixel->ix] == \
-				imap->map[pixel->iy][pixel->ix + 1])
-			while (pixel->Bx1 <= pixel->Bx2)
-			{
-				calc = pixel->Bx1 * 4 + pixel->By1;
-				data[calc] = pixel->R;
-				data[calc + 1] = pixel->G;
-				data[calc + 2] = pixel->B;
-				pixel->Bx1++;
-			}
-		else
-			data = fdf_bresenhamX(pixel, data);
+		pxl = fdf_pxl_prepare(pxl, imap, 0);
+		pxl->data = fdf_bress(pxl, imap);
 	}
-	if (pixel->iy + 1 <= imap->y - 1)
+	if (pxl->iy + 1 <= imap->y - 1)
 	{
-		pixel = fdf_pixel_prepare(pixel, imap, size, 1);
-		data = fdf_bresenhamY(pixel, data);
+		pxl = fdf_pxl_prepare(pxl, imap, 1);
+		pxl->data = fdf_bress(pxl, imap);
 	}
-	return (data);
+	if (pxl->iy + 1 <= imap->y - 1 && pxl->ix + 1 <= imap->x - 1)
+		pxl->data = fdf_immersive_3d(imap, pxl);
+	return (pxl->data);
 }

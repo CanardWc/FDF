@@ -6,11 +6,11 @@
 /*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 18:08:42 by fgrea             #+#    #+#             */
-/*   Updated: 2017/02/18 13:19:43 by fgrea            ###   ########.fr       */
+/*   Updated: 2017/03/13 17:38:39 by fgrea            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 int					ft_atoi(const char *str)
 {

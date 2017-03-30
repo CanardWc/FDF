@@ -6,11 +6,11 @@
 /*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 22:54:06 by fgrea             #+#    #+#             */
-/*   Updated: 2016/11/18 23:05:03 by fgrea            ###   ########.fr       */
+/*   Updated: 2017/03/13 17:46:31 by fgrea            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 char	*ft_strmap(char const *s, char (*f)(char))
 {
