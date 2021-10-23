@@ -1,83 +1,77 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/03 21:15:03 by fgrea             #+#    #+#             */
-/*   Updated: 2017/03/30 14:50:38 by fgrea            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef FDF_H
 # define FDF_H
 
-# include "../libft/includes/libft.h"
-# include "../minilibx_macos/mlx.h"
+# include <mlx.h>
+# include <libft.h>
+# include <stdio.h>
+# include <fcntl.h>
 # include <math.h>
 
-typedef struct		s_map
+# ifndef HEIGHT
+#  define HEIGHT 720
+# endif
+
+# ifndef WIDTH
+#  define WIDTH 1280
+# endif
+
+typedef struct	s_pxl
 {
-	int				**map;
-	ssize_t			x;
-	ssize_t			y;
-}					t_map;
+	int	**map;
+	int	map_line_nbr;
+	int	map_line_size;
 
-typedef struct		s_pxl
+	void	*mlx_ptr;
+	void	*win_ptr;
+}		t_pxl;
+
+typedef struct	s_mod
 {
-	void			*mlx;
-	void			*win;
-	void			*img;
-	char			*data;
-	t_map			*imap;
+	int	dist_x;
+	int	dist_y;
 
-	int				r;
-	int				g;
-	int				b;
+	int	middle_x;
+	int	middle_y;
+	int	key_color;
+	int	height;
+	t_pxl	pxl;
+}		t_mod;
 
-	int				iwidth;
-	int				iheight;
-	int				ix;
-	int				iy;
+typedef struct	s_calc
+{
+	int	*img;
 
-	int				czoom;
-	int				cxcenter;
-	int				cycenter;
-	float			c1;
-	float			c2;
-	float			c3;
+	int	x;
+	int	y;
 
-	float			zoom;
-	float			xdcl;
-	float			ydcl;
-	int				dpth;
+	int	height_1;
+	int	height_2;
 
-	int				size;
-	int				bx1;
-	int				bx2;
-	int				by1;
-	int				by2;
-	int				dx;
-	int				dy;
-	int				e;
+	int	Dx;
+	int	Dy;
+	int	E;
+	int	interchange;
+	int	tmp;
+	int	A;
+	int	B;
+	int	S1;
+	int	S2;
+}		t_calc;
 
-	int				c;
-	int				ci;
-	int				cj;
-}					t_pxl;
+void	fdf_error(int ret);
 
-void				fdf_create_hud(t_pxl *pxl);
-char				*fdf_bress(t_pxl *pxl, t_map *imap);
-t_map				*fdf_parcing(char *argv);
-void				*fdf_create_image(t_map *smap, t_pxl *pxl);
-t_pxl				*fdf_depths_colors(t_pxl *pxl, int depths);
-t_pxl				*fdf_set_color(t_pxl *pxl, int set_base);
-char				*fdf_image_pxl(t_pxl *pxl, t_map *imap);
-void				fdf_usage(int argc);
-void				fdf_other_errors();
-int					fdf_key_capture(int kcd, t_pxl *pxl);
-void				*fdf_kcd_for_img(t_pxl *pxl, t_map *imap);
-void				fdf_map_error(void);
+int	fdf_exit(void);
+
+t_pxl	fdf_reading(char *str);
+
+t_mod	*fdf_mod_setup(t_pxl pxl, t_mod *mod);
+
+void	fdf_create_image(t_pxl pxl, t_mod mod);
+
+int	fdf_get_color(int height, t_mod);
+
+int	*fdf_bresenham(t_calc c, int i, int j, t_mod mod);
+
+int	fdf_key_events(int key, t_mod *mod);
 
 #endif
