@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf_create_map.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/09 15:45:23 by fgrea             #+#    #+#             */
+/*   Updated: 2021/11/09 15:47:54 by fgrea            ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <fdf.h>
 
 int	*fdf_fill_line(char *line, int *new_line, int count)
 {
 	int	*tmp;
 	int	i;
-	
+
 	tmp = new_line;
 	i = 0;
 	while (count--)
@@ -20,7 +32,7 @@ int	*fdf_fill_line(char *line, int *new_line, int count)
 int	*fdf_setup_line(char *line, int *count)
 {
 	char	*tmp;
-	int	*new_line;
+	int		*new_line;
 
 	tmp = line;
 	*count = 0;
@@ -28,7 +40,7 @@ int	*fdf_setup_line(char *line, int *count)
 	{
 		(*count)++;
 		tmp = ft_strchr(tmp, ' ');
-		while(tmp && *tmp && *tmp == ' ')
+		while (tmp && *tmp && *tmp == ' ')
 			tmp++;
 	}
 	new_line = calloc(*count, sizeof(int));
@@ -40,9 +52,9 @@ int	*fdf_setup_line(char *line, int *count)
 t_pxl	fdf_create_map(char *str, int line_count, t_pxl pxl)
 {
 	char	*line;
-	int	count;
-	int	fd;
-	int	i;
+	int		count;
+	int		fd;
+	int		i;
 
 	i = 0;
 	pxl.map = ft_calloc(line_count, sizeof(int *));
@@ -70,9 +82,9 @@ t_pxl	fdf_reading(char *str)
 {
 	t_pxl	pxl;
 	char	*tmp;
-	int	line_count;
-	int	err;
-	int	fd;
+	int		line_count;
+	int		err;
+	int		fd;
 
 	line_count = -1;
 	err = 1;

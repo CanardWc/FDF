@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/09 15:08:59 by fgrea             #+#    #+#             */
+/*   Updated: 2021/11/09 15:44:02 by fgrea            ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <fdf.h>
 
-const char	*errors[] = {
+const char	*g_errors[] = {
 	"Wrong number of arguments",
 	"Error while reading the file",
 	"Error while allocating the map",
@@ -10,20 +21,14 @@ const char	*errors[] = {
 
 void	fdf_error(int ret)
 {
-	ft_printf("%s\n", errors[ret]);
+	ft_printf("%s\n", g_errors[ret]);
 	exit (0);
 }
 
 int	fdf_exit(void)
 {
-	//ft_printf("size = %d\n", mod->pxl.map_line_nbr);
-	//while (mod->pxl.map_line_nbr-- > 0)
-	//	free(mod->pxl.map[mod->pxl.map_line_nbr]);
-	//free(mod->pxl.map);
-	//free(mod);
-	//mod = NULL;
 	exit(0);
-	return(0);
+	return (0);
 }
 
 t_mod	*fdf_mod_setup(t_pxl pxl, t_mod *mod)
@@ -32,7 +37,7 @@ t_mod	*fdf_mod_setup(t_pxl pxl, t_mod *mod)
 	double	dist;
 	double	angle_x;
 	double	angle_y;
-	int	i;
+	int		i;
 
 	i = 0;
 	while (HEIGHT / 2 - pxl.map_line_size * i > 200)
@@ -66,7 +71,7 @@ int	main(int ac, char **av)
 	pxl.mlx_ptr = mlx_init();
 	mlx_do_key_autorepeaton(pxl.mlx_ptr);
 	pxl.win_ptr = mlx_new_window(pxl.mlx_ptr, WIDTH, HEIGHT, "FDF");
-	mod->pxl = pxl;	
+	mod->pxl = pxl;
 	fdf_create_image(pxl, *mod);
 	mlx_hook(pxl.win_ptr, 2, 1L << 0, fdf_key_events, mod);
 	mlx_hook(pxl.win_ptr, 17, 0, fdf_exit, mod);

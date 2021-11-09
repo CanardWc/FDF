@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf_image.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/09 15:48:08 by fgrea             #+#    #+#             */
+/*   Updated: 2021/11/09 15:48:53 by fgrea            ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <fdf.h>
 
 int	fdf_get_color(int height, t_mod mod)
@@ -37,8 +49,8 @@ void	fdf_display_hud(t_pxl pxl)
 int	*fdf_define_img(int *img, t_pxl pxl, t_mod mod)
 {
 	t_calc	c;
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	j = -1;
 	c.img = img;
@@ -63,14 +75,15 @@ int	*fdf_define_img(int *img, t_pxl pxl, t_mod mod)
 void	fdf_create_image(t_pxl pxl, t_mod mod)
 {
 	void	*img_ptr;
-	int	*img;
-	int	size_line;
-	int	bits_per_pixel;
-	int	endian;
+	int		*img;
+	int		size_line;
+	int		bits_per_pixel;
+	int		endian;
 
 	mlx_clear_window(pxl.mlx_ptr, pxl.win_ptr);
 	img_ptr = mlx_new_image(pxl.mlx_ptr, WIDTH, HEIGHT);
-	img = (int *)mlx_get_data_addr(img_ptr, &bits_per_pixel, &size_line, &endian);
+	img = (int *)mlx_get_data_addr(img_ptr, &bits_per_pixel, &size_line, \
+			&endian);
 	img = fdf_define_img(img, pxl, mod);
 	mlx_put_image_to_window(pxl.mlx_ptr, pxl.win_ptr, img_ptr, 0, 0);
 	fdf_display_hud(pxl);

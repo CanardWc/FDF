@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/09 15:36:12 by fgrea             #+#    #+#             */
+/*   Updated: 2021/11/09 15:42:20 by fgrea            ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FDF_H
 # define FDF_H
 
@@ -15,29 +27,29 @@
 #  define WIDTH 1280
 # endif
 
-typedef struct	s_pxl
+typedef struct s_pxl
 {
-	int	**map;
-	int	map_line_nbr;
-	int	map_line_size;
+	int		**map;
+	int		map_line_nbr;
+	int		map_line_size;
 
 	void	*mlx_ptr;
 	void	*win_ptr;
-}		t_pxl;
+}	t_pxl;
 
-typedef struct	s_mod
+typedef struct s_mod
 {
-	int	dist_x;
-	int	dist_y;
+	int		dist_x;
+	int		dist_y;
 
-	int	middle_x;
-	int	middle_y;
-	int	key_color;
-	int	height;
+	int		middle_x;
+	int		middle_y;
+	int		key_color;
+	int		height;
 	t_pxl	pxl;
-}		t_mod;
+}	t_mod;
 
-typedef struct	s_calc
+typedef struct s_calc
 {
 	int	*img;
 
@@ -47,20 +59,20 @@ typedef struct	s_calc
 	int	height_1;
 	int	height_2;
 
-	int	Dx;
-	int	Dy;
-	int	E;
+	int	dx;
+	int	dy;
+	int	e;
 	int	interchange;
 	int	tmp;
-	int	A;
-	int	B;
-	int	S1;
-	int	S2;
-}		t_calc;
+	int	a;
+	int	b;
+	int	s1;
+	int	s2;
+}	t_calc;
 
 void	fdf_error(int ret);
 
-int	fdf_exit(void);
+int		fdf_exit(void);
 
 t_pxl	fdf_reading(char *str);
 
@@ -68,10 +80,10 @@ t_mod	*fdf_mod_setup(t_pxl pxl, t_mod *mod);
 
 void	fdf_create_image(t_pxl pxl, t_mod mod);
 
-int	fdf_get_color(int height, t_mod);
+int		fdf_get_color(int height, t_mod mod);
 
-int	*fdf_bresenham(t_calc c, int i, int j, t_mod mod);
+int		*fdf_bresenham(t_calc c, int i, int j, t_mod mod);
 
-int	fdf_key_events(int key, t_mod *mod);
+int		fdf_key_events(int key, t_mod *mod);
 
 #endif
