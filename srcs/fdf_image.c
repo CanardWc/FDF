@@ -6,7 +6,7 @@
 /*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 15:48:08 by fgrea             #+#    #+#             */
-/*   Updated: 2021/11/09 15:48:53 by fgrea            ###   ########lyon.fr   */
+/*   Updated: 2022/05/12 13:26:06 by fgrea            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	fdf_get_color(int height, t_mod mod)
 	int	blue;
 
 	height /= 4;
-	light = 0 + height % 256;
+	light = 256;
 	red = (200 + ((height > 0) * (height * 2)) + mod.key_color) % 256;
 	green = (100 + ((height != 0) * (height * 3)) + mod.key_color) % 256;
 	blue = (0 + ((height < 0) * (height * 4)) + mod.key_color) % 256;
